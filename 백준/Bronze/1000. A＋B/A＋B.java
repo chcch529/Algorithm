@@ -1,14 +1,26 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+//        Scanner sc = new Scanner(System.in);
+//
+//        int A = sc.nextInt();
+//        int B = sc.nextInt();
+//
+//        System.out.println(A+B);
+//
+//        sc.close();
 
-        int A = sc.nextInt();
-        int B = sc.nextInt();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println(A+B);
+        String str = br.readLine();
+        StringTokenizer st = new StringTokenizer(str, " ");
+        int a = Integer.parseInt(st.nextToken());
+        int b = Integer.parseInt(st.nextToken());
 
-        sc.close();
+        System.out.println(a+b);
     }
 }
