@@ -14,6 +14,7 @@ public class Main {
         int M = Integer.parseInt(st.nextToken());
 
         int[] A = new int[N+M];
+        int[] B = new int[M];
 
         st = new StringTokenizer(br.readLine());
 
@@ -21,15 +22,33 @@ public class Main {
             A[i] = Integer.parseInt(st.nextToken());
         }
         st = new StringTokenizer(br.readLine());
-        for (int i=N; i<N+M; i++){
-            A[i] = Integer.parseInt(st.nextToken());
+        for (int i=0; i<M; i++){
+            B[i] = Integer.parseInt(st.nextToken());
         }
 
-        Arrays.sort(A);
+        int a =0, b=0;
         StringBuilder sb = new StringBuilder();
-        for (int i: A){
-            sb.append(i + " ");
+
+        while (a < N && b < M){
+            if (A[a] < B[b]){
+                sb.append(A[a++]).append(" ");
+            } else {
+                sb.append(B[b++]).append(" ");
+            }
         }
+
+        if (a < N){
+            while (a < N){
+                sb.append(A[a++]).append(" ");
+            }
+        }
+
+        if (b < M){
+            while (b < M){
+                sb.append(B[b++]).append(" ");
+            }
+        }
+
         System.out.println(sb);
     }
 
