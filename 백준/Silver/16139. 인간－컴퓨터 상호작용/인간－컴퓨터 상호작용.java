@@ -14,10 +14,22 @@ public class Main {
         int Q = Integer.parseInt(br.readLine());
 
         int len = str.length();
-        int[] sum = new int[len+1];
-        int[] cnt = new int[len];
 
         StringBuilder sb= new StringBuilder();
+
+
+        int[][] all = new int[len +1][26];
+
+        for (int i=0; i<len; i++){
+            int c = str.charAt(i) - 'a';
+
+            for (int j=0; j<26; j++){
+                all[i +1][j] = all[i][j];
+            }
+
+            all[i+1][c]++;
+
+        }
 
         for (int q = 0; q<Q; q++){
             StringTokenizer st = new StringTokenizer(br.readLine());
@@ -26,19 +38,11 @@ public class Main {
             int l = Integer.parseInt(st.nextToken());
             int r = Integer.parseInt(st.nextToken());
 
-            for (int i = 0; i<len; i++){
-                if (str.charAt(i) == a.charAt(0)){
-                    cnt[i] = 1;
-                }
-                sum[i+1] = sum[i] + cnt[i];
-            }
+            int c = a.charAt(0) - 'a';
 
-            int answer = sum[r +1] - sum[l];
+            int answer = all[r +1][c] - all[l][c];
 
             sb.append(answer).append("\n");
-
-            cnt = new int[len];
-
         }
 
 
