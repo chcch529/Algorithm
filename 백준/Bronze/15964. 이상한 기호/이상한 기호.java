@@ -12,7 +12,9 @@ public class Main {
         int a = Integer.parseInt(st.nextToken());
         int b = Integer.parseInt(st.nextToken());
 
-        System.out.println((a+b) * (a-b));
+        long answer = (long) (a + b) * (a-b);
+        
+        System.out.println(answer);
     }
 }
 
