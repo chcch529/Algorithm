@@ -17,11 +17,7 @@ class Solution {
         visited = new boolean[102][102];
         
         for (int[] rec: rectangle){
-            for(int i= rec[0]*2 +1; i<rec[2]*2; i++){
-                for(int j= rec[1]*2 + 1; j< rec[3]*2; j++){
-                    board[i][j] = 2;
-                }
-            }
+            
             for(int i= rec[0]*2; i<=rec[2]*2; i++){
                 if(board[i][rec[1]*2] != 2) board[i][rec[1]*2] = 1;
                 if(board[i][rec[3]*2] != 2) board[i][rec[3]*2] = 1;
@@ -30,6 +26,11 @@ class Solution {
                 if(board[rec[0]*2][i] != 2) board[rec[0]*2][i] = 1;
                 if(board[rec[2]*2][i] != 2) board[rec[2]*2][i] = 1;
                 
+            }
+            for(int i= rec[0]*2 +1; i<rec[2]*2; i++){
+                for(int j= rec[1]*2 + 1; j< rec[3]*2; j++){
+                    board[i][j] = 2;
+                }
             }
 
             
