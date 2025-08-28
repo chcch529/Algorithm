@@ -19,30 +19,18 @@ public class Main {
             int n = Integer.parseInt(br.readLine());
             String str = br.readLine();
 
-            int del_cnt = 0;
-            for (int i = 0; i < p.length(); i++) {
-                if (p.charAt(i) == 'D') del_cnt++;
-            }
-
-            if (del_cnt > n) {
-                sb.append("error").append("\n");
-                continue;
-            }
-
             nums = new ArrayDeque<>();
 
-            StringBuilder num = new StringBuilder();
-            for (int i = 1; i < str.length(); i++) {
-                char ch = str.charAt(i);
-                if (ch >= '0' && ch <= '9') {
-                    num.append(ch);
-                } else {
-                    nums.addLast(num.toString());
-                    num = new StringBuilder();
+            String substr = str.substring(1, str.length() - 1);
+            if (!substr.isEmpty()) {
+                String[] split = substr.split(",");
+                for (String s : split) {
+                    nums.addLast(s);
                 }
             }
 
             flag = true;
+            boolean error = false;
 
             for (int i = 0; i < p.length(); i++) {
                 char op = p.charAt(i);
@@ -50,8 +38,13 @@ public class Main {
                 if (op == 'R') {
                     flag = !flag;
                 } else {
-                    del();
+                    error = del();
                 }
+            }
+
+            if (error) {
+                sb.append("error").append("\n");
+                continue;
             }
 
             sb.append("[");
@@ -80,12 +73,17 @@ public class Main {
 
     }
 
-    public static void del() {
+    public static boolean del() {
+
+        if (nums.isEmpty()) return true;
+
         if (flag) { // 앞에서부터 제거
             nums.removeFirst();
         } else { // 뒤에서 부터 제거
             nums.removeLast();
         }
+
+        return false;
     }
 
 }
