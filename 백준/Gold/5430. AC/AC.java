@@ -5,8 +5,8 @@ import java.util.*;
 
 public class Main {
 
-    static int front_del;
-    static int back_del;
+    static ArrayDeque<String> nums;
+    static boolean flag;
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -29,7 +29,7 @@ public class Main {
                 continue;
             }
 
-            ArrayList<String> nums = new ArrayList<>();
+            nums = new ArrayDeque<>();
 
             StringBuilder num = new StringBuilder();
             for (int i = 1; i < str.length(); i++) {
@@ -37,31 +37,21 @@ public class Main {
                 if (ch >= '0' && ch <= '9') {
                     num.append(ch);
                 } else {
-                    nums.add(num.toString());
+                    nums.addLast(num.toString());
                     num = new StringBuilder();
                 }
             }
 
-            int cnt = 0;
-            front_del = 0;
-            back_del = 0;
+            flag = true;
 
             for (int i = 0; i < p.length(); i++) {
                 char op = p.charAt(i);
 
                 if (op == 'R') {
-                    cnt++;
+                    flag = !flag;
                 } else {
-                    del(cnt);
+                    del();
                 }
-            }
-
-            for (int i = n-1; i > n-1 -back_del; i--) {
-                nums.remove(i);
-            }
-
-            for (int i = 0; i < front_del; i++) {
-                nums.remove(0);
             }
 
             sb.append("[");
@@ -71,19 +61,18 @@ public class Main {
                 continue;
             }
 
-            if (cnt % 2 == 0) {
+            if (flag) {
                 for (String s : nums) {
                     sb.append(s).append(",");
                 }
             } else {
-                for (int i = nums.size() - 1; i >= 0; i--) {
-                    sb.append(nums.get(i)).append(",");
+                while (!nums.isEmpty()) {
+                    String s = nums.pollLast();
+                    sb.append(s).append(",");
                 }
             }
 
             sb.deleteCharAt(sb.length() - 1).append("]\n");
-
-
 
         }
 
@@ -91,11 +80,11 @@ public class Main {
 
     }
 
-    public static void del(int cnt) {
-        if (cnt % 2 == 0) { // 앞에서부터 제거
-            front_del++;
+    public static void del() {
+        if (flag) { // 앞에서부터 제거
+            nums.removeFirst();
         } else { // 뒤에서 부터 제거
-            back_del++;
+            nums.removeLast();
         }
     }
 
